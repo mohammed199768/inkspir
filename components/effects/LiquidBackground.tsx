@@ -17,6 +17,7 @@ export default function LiquidBackground() {
         let aspect = 1;
         const mouse = new Vec2(-1);
         const velocity = new Vec2();
+        let velocityNeedsUpdate = false;
 
         function resize() {
             if (!containerRef.current) return;
@@ -157,23 +158,23 @@ export default function LiquidBackground() {
 
             velocity.x = deltaX / delta;
             velocity.y = deltaY / delta;
-            velocity.needsUpdate = true;
+            velocityNeedsUpdate = true;
         }
 
         let animationId: number;
         function update(t: number) {
             animationId = requestAnimationFrame(update);
 
-            if (!velocity.needsUpdate) {
+            if (!velocityNeedsUpdate) {
                 mouse.set(-1);
                 velocity.set(0);
             }
-            velocity.needsUpdate = false;
+            velocityNeedsUpdate = false;
 
             flowmap.aspect = aspect;
             flowmap.mouse.copy(mouse);
 
-            flowmap.velocity.lerp(velocity, velocity.len ? 0.15 : 0.1);
+            flowmap.velocity.lerp(velocity, velocity.len() ? 0.15 : 0.1);
             flowmap.update();
 
             program.uniforms.uTime.value = t * 0.01;

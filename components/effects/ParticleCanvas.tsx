@@ -23,25 +23,25 @@ export default function ParticleCanvas() {
         const particleCount = Math.floor((canvas.width * canvas.height) / 6000);
 
         class Particle {
-            x: number;
-            y: number;
-            speed: number;
-            opacity: number;
-            fadeDelay: number;
-            fadeStart: number;
-            fadingOut: boolean;
+            x: number = 0;
+            y: number = 0;
+            speed: number = 0;
+            opacity: number = 1;
+            fadeDelay: number = 0;
+            fadeStart: number = 0;
+            fadingOut: boolean = false;
 
             constructor() {
                 this.reset();
-                this.y = Math.random() * canvas.height;
+                this.y = Math.random() * canvas!.height;
                 this.fadeDelay = Math.random() * 600 + 100;
                 this.fadeStart = Date.now() + this.fadeDelay;
                 this.fadingOut = false;
             }
 
             reset() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
+                this.x = Math.random() * canvas!.width;
+                this.y = Math.random() * canvas!.height;
                 this.speed = Math.random() / 5 + 0.1;
                 this.opacity = 1;
                 this.fadeDelay = Math.random() * 600 + 100;

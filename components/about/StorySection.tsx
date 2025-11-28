@@ -1,4 +1,4 @@
-// © Mohammad Aldomi — Project Source Code
+// Mohammad Aldomi - Project Source Code
 
 export default function StorySection() {
     return (
